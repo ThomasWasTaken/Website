@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Self-Hosted SaaS Analytics Platform | Thomas Lund</title>
+<style>
+:root {
+  --bg: #050505;
+  --card: #0d1117;
+  --border: #30363d;
+  --accent: #00ffcc;
+  --text: #e6edf3;
+  --text-dim: #848d97;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 5rem;
+}
+
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.top-nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.brand {
+  color: var(--accent);
+  text-decoration: none;
+  font-family: monospace;
+  font-weight: 700;
+}
+
+.link {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.link:hover {
+  color: var(--accent);
+}
+
+.hero {
+  padding-top: 3.5rem;
+  margin-bottom: 2rem;
+}
+
+.kicker {
+  color: var(--accent);
+  font-family: monospace;
+  margin-bottom: 0.6rem;
+  display: inline-block;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.2;
+  margin-bottom: 0.8rem;
+}
+
+.subtitle {
+  color: var(--text-dim);
+  max-width: 760px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 10px;
+  padding: 1.1rem 1.2rem;
+}
+
+.card h2 {
+  font-size: 1rem;
+  color: var(--accent);
+  font-family: monospace;
+  margin-bottom: 0.8rem;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.tag {
+  font-family: monospace;
+  font-size: 0.72rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #141a20;
+  color: var(--accent);
+}
+
+.section {
+  margin-bottom: 1.3rem;
+}
+
+.section h3 {
+  color: #fff;
+  margin-bottom: 0.45rem;
+}
+
+.section p,
+.section li {
+  color: var(--text-dim);
+}
+
+.section ul {
+  margin-left: 1.2rem;
+}
+
+.section li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-note {
+  margin-top: 2.2rem;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+<header class="top-nav">
+  <div class="container">
+    <a class="brand" href="index.html">T.LUND_ROOT</a>
+    <a class="link" href="/index.html">← Back to projects</a>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <span class="kicker">PROJECT_DETAIL</span>
+    <h1>Self-Hosted SaaS Analytics Platform</h1>
+    <p class="subtitle">GA4 + Multi-Agent Simulation platform for acquisition, conversion, and behavioral analysis with automated insights.</p>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <h2>Overview</h2>
+      <div class="section">
+        <h3>Problem</h3>
+        <p>SaaS teams often rely on disconnected analytics sources, making it difficult to connect user behavior, acquisition channels, and conversion outcomes into one reliable decision system.</p>
+      </div>
+      <div class="section">
+        <h3>Solution</h3>
+        <p>I built a self-hosted analytics pipeline that combines GA4 events with a simulated internal database, then layers multi-agent traffic simulations on top to test realistic behavior and conversion scenarios.</p>
+      </div>
+      <div class="section">
+        <h3>Outcome</h3>
+        <ul>
+          <li>Unified view of funnel performance and drop-off points from acquisition to conversion.</li>
+          <li>Interactive Streamlit dashboards for channel efficiency and cohort behavior.</li>
+          <li>Automated trend and anomaly detection for faster, data-driven decisions.</li>
+        </ul>
+      </div>
+    </article>
+
+    <aside class="card">
+      <h2>Tech Stack</h2>
+      <div class="stack">
+        <span class="tag">Python</span>
+        <span class="tag">SQL</span>
+        <span class="tag">GA4</span>
+        <span class="tag">Streamlit</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Data Pipeline</span>
+        <span class="tag">Anomaly Detection</span>
+      </div>
+    </aside>
+  </section>
+
+  <section class="card">
+    <h2>Key Features</h2>
+    <div class="section">
+      <ul>
+        <li>Integrated GA4 event ingestion with internal simulation-ready storage.</li>
+        <li>Multi-agent simulation framework for user flow, traffic spikes, and conversion behavior modeling.</li>
+        <li>Dashboards tracking funnel drop-offs, channel performance, and cohort movement over time.</li>
+        <li>Automated alerting for trend breaks and anomalies in key business metrics.</li>
+        <li>Containerized deployment of ingestion, processing, and visualization services.</li>
+      </ul>
+    </div>
+  </section>
+
+  <p class="footer-note">If you want, this page can be extended with architecture diagrams, screenshots, and GitHub links.</p>
+</main>
+</body>
+</html>
