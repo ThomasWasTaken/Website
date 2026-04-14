@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legal | Architecture Deep Dive</title>
+  <style>
+    :root { --bg:#fff; --text:#111; --secondary:#666; --border:#eaeaea; --card-shadow:0 4px 16px rgba(17,17,17,.05); --card-shadow-hover:0 10px 24px rgba(17,17,17,.08);}*{box-sizing:border-box;margin:0;padding:0}body{font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}a{color:inherit}.top-nav{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}.top-nav-inner,.sub-nav-inner,main{max-width:1100px;margin:auto;padding:0 20px}.top-nav-inner{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}.logo{font-weight:700;letter-spacing:.03em;text-decoration:none}.main-links{display:flex;gap:18px;flex-wrap:wrap}.main-links a{text-decoration:none;color:var(--secondary);font-size:.95rem;transition:color .2s ease}.main-links a:hover{color:var(--text)}.sub-nav{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:#fff}.sub-nav-inner{display:flex;gap:12px;min-height:56px;align-items:center;overflow-x:auto}.sub-nav-link{text-decoration:none;border:1px solid var(--border);padding:8px 14px;border-radius:999px;color:var(--secondary);white-space:nowrap;transition:all .2s ease;font-size:.92rem}.sub-nav-link:hover,.sub-nav-link.active{color:var(--text);border-color:#d8d8d8;background:#fafafa}main{padding-top:40px;padding-bottom:40px}section{margin:80px 0}.hero h1{font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.02em;margin-bottom:10px}.hero p{max-width:760px;color:var(--secondary);font-size:1.04rem}.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;align-items:center}.flow-step{border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;box-shadow:var(--card-shadow);font-weight:600}.arrow{text-align:center;color:#bbb;font-size:1.1rem}.layer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.layer-card{border:1px solid var(--border);border-radius:12px;padding:18px;box-shadow:var(--card-shadow);transition:transform .2s ease,box-shadow .2s ease}.layer-card:hover{transform:scale(1.02);box-shadow:var(--card-shadow-hover)}.layer-card h4{margin-bottom:8px}.layer-card p{color:var(--secondary);font-size:.94rem}.fade-in{opacity:0;transform:translateY(12px);transition:opacity .55s ease,transform .55s ease}.fade-in.visible{opacity:1;transform:translateY(0)}@media (max-width:960px){.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}}@media (max-width:640px){.top-nav-inner{min-height:72px;align-items:flex-start;padding-top:12px;padding-bottom:12px;flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header class="top-nav">
+    <div class="top-nav-inner">
+      <a class="logo" href="../src/index.html">T.LUND_ROOT</a>
+      <nav class="main-links" aria-label="Main">
+        <a href="../src/index.html#projects">Projects</a>
+        <a href="mailto:Thomas.f.lunnd@hotmail.com">Contact</a>
+      </nav>
+    </div>
+    <nav class="sub-nav" aria-label="Legal Pages">
+      <div class="sub-nav-inner">
+        <a class="sub-nav-link" href="index.html">Overview</a>
+        <a class="sub-nav-link active" href="architecture.html">Architecture</a>
+        <a class="sub-nav-link" href="simulation.html">Simulation</a>
+        <a class="sub-nav-link" href="insights.html">Insights</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero fade-in">
+      <h1>System Architecture</h1>
+      <p>The architecture is designed as a clean pipeline with strict layer separation so that data reliability, simulation realism, and reporting speed can scale independently.</p>
+    </section>
+
+    <section class="fade-in">
+      <div class="flow" aria-label="Architecture flow">
+        <div class="flow-step">Data Sources</div>
+        <div class="arrow">→</div>
+        <div class="flow-step">Processing</div>
+        <div class="arrow">→</div>
+        <div class="flow-step">Simulation</div>
+      </div>
+      <div class="flow" style="margin-top:10px;">
+        <div class="flow-step">Analytics</div>
+        <div class="arrow">→</div>
+        <div class="flow-step">Dashboard</div>
+      </div>
+    </section>
+
+    <section class="fade-in">
+      <div class="layer-grid">
+        <article class="layer-card">
+          <h4>Data Sources</h4>
+          <p>GA4 event streams, campaign metadata, and internal business dimensions form the raw input layer used for baseline behavior tracking.</p>
+          <p><strong>Stack:</strong> GA4 API, CSV exports, connector scripts.</p>
+        </article>
+        <article class="layer-card">
+          <h4>Processing</h4>
+          <p>Events are cleaned, standardized, and sessionized to create analytics-ready tables with consistent naming conventions and timestamps.</p>
+          <p><strong>Stack:</strong> Python ETL, SQL transformations.</p>
+        </article>
+        <article class="layer-card">
+          <h4>Simulation</h4>
+          <p>Agent models consume processed behavior patterns to generate synthetic journeys and conversion outcomes across modeled scenarios.</p>
+          <p><strong>Stack:</strong> Python simulation engine, rule-based logic modules.</p>
+        </article>
+        <article class="layer-card">
+          <h4>Analytics</h4>
+          <p>Real and simulated data are combined for funnel metrics, anomaly detection, and comparative scenario analysis.</p>
+          <p><strong>Stack:</strong> SQL marts, metric calculation pipelines.</p>
+        </article>
+        <article class="layer-card">
+          <h4>Dashboard</h4>
+          <p>Decision dashboards surface KPI movements, channel impact, and recommendations for product and growth stakeholders.</p>
+          <p><strong>Stack:</strong> Streamlit, interactive chart components.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>

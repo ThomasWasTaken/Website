@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legal | Insights Deep Dive</title>
+  <style>
+    :root { --bg:#fff; --text:#111; --secondary:#666; --border:#eaeaea; --card-shadow:0 4px 16px rgba(17,17,17,.05); --card-shadow-hover:0 10px 24px rgba(17,17,17,.08);}*{box-sizing:border-box;margin:0;padding:0}body{font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}a{color:inherit}.top-nav{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}.top-nav-inner,.sub-nav-inner,main{max-width:1100px;margin:auto;padding:0 20px}.top-nav-inner{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}.logo{font-weight:700;letter-spacing:.03em;text-decoration:none}.main-links{display:flex;gap:18px;flex-wrap:wrap}.main-links a{text-decoration:none;color:var(--secondary);font-size:.95rem;transition:color .2s ease}.main-links a:hover{color:var(--text)}.sub-nav{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:#fff}.sub-nav-inner{display:flex;gap:12px;min-height:56px;align-items:center;overflow-x:auto}.sub-nav-link{text-decoration:none;border:1px solid var(--border);padding:8px 14px;border-radius:999px;color:var(--secondary);white-space:nowrap;transition:all .2s ease;font-size:.92rem}.sub-nav-link:hover,.sub-nav-link.active{color:var(--text);border-color:#d8d8d8;background:#fafafa}main{padding-top:40px;padding-bottom:40px}section{margin:80px 0}.hero h1{font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.02em;margin-bottom:10px}.hero p{max-width:760px;color:var(--secondary);font-size:1.04rem}.stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.tile{border:1px solid var(--border);border-radius:12px;padding:20px;box-shadow:var(--card-shadow);transition:transform .2s ease,box-shadow .2s ease}.tile:hover{transform:scale(1.02);box-shadow:var(--card-shadow-hover)}.tile h3{margin-bottom:8px;font-size:1.02rem}.tile p{color:var(--secondary);font-size:.94rem}.impact{border:1px solid var(--border);border-radius:12px;padding:24px;box-shadow:var(--card-shadow)}.impact ul{padding-left:20px;color:var(--secondary)}.impact li{margin:8px 0}.fade-in{opacity:0;transform:translateY(12px);transition:opacity .55s ease,transform .55s ease}.fade-in.visible{opacity:1;transform:translateY(0)}@media (max-width:640px){.top-nav-inner{min-height:72px;align-items:flex-start;padding-top:12px;padding-bottom:12px;flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header class="top-nav">
+    <div class="top-nav-inner">
+      <a class="logo" href="../src/index.html">T.LUND_ROOT</a>
+      <nav class="main-links" aria-label="Main">
+        <a href="../src/index.html#projects">Projects</a>
+        <a href="mailto:Thomas.f.lunnd@hotmail.com">Contact</a>
+      </nav>
+    </div>
+    <nav class="sub-nav" aria-label="Legal Pages">
+      <div class="sub-nav-inner">
+        <a class="sub-nav-link" href="index.html">Overview</a>
+        <a class="sub-nav-link" href="architecture.html">Architecture</a>
+        <a class="sub-nav-link" href="simulation.html">Simulation</a>
+        <a class="sub-nav-link active" href="insights.html">Insights</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero fade-in">
+      <h1>Analytics & Insights</h1>
+      <p>Insights combine real behavioral data with simulated outcomes to provide clear performance signals, early warning alerts, and guidance for operational decisions.</p>
+    </section>
+
+    <section class="stack fade-in">
+      <article class="tile">
+        <h3>Overview</h3>
+        <p>A unified reporting layer aligns acquisition, activation, retention, and conversion metrics across channels and product journeys.</p>
+      </article>
+      <article class="tile">
+        <h3>Funnel analysis</h3>
+        <p>Stage-by-stage drop-off tracking identifies friction points and quantifies expected gain from targeted optimization initiatives.</p>
+      </article>
+      <article class="tile">
+        <h3>Cohort tracking</h3>
+        <p>User cohorts grouped by channel, signup period, and intent profile reveal retention quality and long-term value patterns.</p>
+      </article>
+      <article class="tile">
+        <h3>Anomaly detection</h3>
+        <p>Rule-based and trend-threshold checks surface unusual KPI shifts early, reducing delayed reaction risk during campaign cycles.</p>
+      </article>
+    </section>
+
+    <section class="impact fade-in">
+      <h3 style="margin-bottom:10px;">Decision-making impact</h3>
+      <ul>
+        <li>Prioritizes high-impact experiments with confidence intervals informed by both observed and simulated behavior.</li>
+        <li>Improves communication between growth, product, and leadership teams through shared metric definitions.</li>
+        <li>Accelerates response time when funnel degradation or acquisition quality shifts are detected.</li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>

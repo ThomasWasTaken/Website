@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legal | Simulation Deep Dive</title>
+  <style>
+    :root { --bg:#fff; --text:#111; --secondary:#666; --border:#eaeaea; --card-shadow:0 4px 16px rgba(17,17,17,.05); --card-shadow-hover:0 10px 24px rgba(17,17,17,.08);}*{box-sizing:border-box;margin:0;padding:0}body{font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}a{color:inherit}.top-nav{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}.top-nav-inner,.sub-nav-inner,main{max-width:1100px;margin:auto;padding:0 20px}.top-nav-inner{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}.logo{font-weight:700;letter-spacing:.03em;text-decoration:none}.main-links{display:flex;gap:18px;flex-wrap:wrap}.main-links a{text-decoration:none;color:var(--secondary);font-size:.95rem;transition:color .2s ease}.main-links a:hover{color:var(--text)}.sub-nav{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:#fff}.sub-nav-inner{display:flex;gap:12px;min-height:56px;align-items:center;overflow-x:auto}.sub-nav-link{text-decoration:none;border:1px solid var(--border);padding:8px 14px;border-radius:999px;color:var(--secondary);white-space:nowrap;transition:all .2s ease;font-size:.92rem}.sub-nav-link:hover,.sub-nav-link.active{color:var(--text);border-color:#d8d8d8;background:#fafafa}main{padding-top:40px;padding-bottom:40px}section{margin:80px 0}.hero h1{font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.02em;margin-bottom:10px}.hero p{max-width:760px;color:var(--secondary);font-size:1.04rem}.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.card{border:1px solid var(--border);border-radius:12px;padding:20px;box-shadow:var(--card-shadow);transition:transform .2s ease,box-shadow .2s ease}.card:hover{transform:scale(1.02);box-shadow:var(--card-shadow-hover)}.card h3{margin-bottom:8px;font-size:1.02rem}.card p{color:var(--secondary);font-size:.94rem}.flow-list{border:1px solid var(--border);border-radius:12px;padding:20px;box-shadow:var(--card-shadow)}.flow-list ol{padding-left:22px;color:var(--secondary)}.flow-list li{margin:8px 0}.fade-in{opacity:0;transform:translateY(12px);transition:opacity .55s ease,transform .55s ease}.fade-in.visible{opacity:1;transform:translateY(0)}@media (max-width:640px){.top-nav-inner{min-height:72px;align-items:flex-start;padding-top:12px;padding-bottom:12px;flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header class="top-nav">
+    <div class="top-nav-inner">
+      <a class="logo" href="../src/index.html">T.LUND_ROOT</a>
+      <nav class="main-links" aria-label="Main">
+        <a href="../src/index.html#projects">Projects</a>
+        <a href="mailto:Thomas.f.lunnd@hotmail.com">Contact</a>
+      </nav>
+    </div>
+    <nav class="sub-nav" aria-label="Legal Pages">
+      <div class="sub-nav-inner">
+        <a class="sub-nav-link" href="index.html">Overview</a>
+        <a class="sub-nav-link" href="architecture.html">Architecture</a>
+        <a class="sub-nav-link active" href="simulation.html">Simulation</a>
+        <a class="sub-nav-link" href="insights.html">Insights</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero fade-in">
+      <h1>Multi-Agent Simulation</h1>
+      <p>The simulation layer models realistic user behavior under different traffic, product, and campaign conditions so teams can test outcomes before launching changes.</p>
+    </section>
+
+    <section class="fade-in">
+      <div class="cards-grid">
+        <article class="card">
+          <h3>What is simulated?</h3>
+          <p>User sessions, source channels, navigation sequences, conversion intent, and abandonment points are generated from calibrated behavior profiles.</p>
+        </article>
+        <article class="card">
+          <h3>Agent behavior modeling</h3>
+          <p>Each agent has probabilistic rules, state transitions, and friction sensitivity that influence page depth, timing, and conversion likelihood.</p>
+        </article>
+        <article class="card">
+          <h3>Scenario controls</h3>
+          <p>Inputs such as traffic mix, campaign quality, onboarding friction, and content changes can be adjusted to test expected KPI movement.</p>
+        </article>
+        <article class="card">
+          <h3>Validation loop</h3>
+          <p>Simulation outputs are compared to historical GA4 distributions to improve model fidelity over recurring calibration cycles.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="flow-list fade-in">
+      <h3 style="margin-bottom:10px;">Example flow</h3>
+      <ol>
+        <li>An agent enters from a paid channel with medium intent.</li>
+        <li>The session evaluates landing clarity and friction to decide continuation probability.</li>
+        <li>If engaged, the agent moves through feature and pricing views with time-decay weighting.</li>
+        <li>A conversion or drop-off event is emitted and attributed to funnel stage plus channel context.</li>
+      </ol>
+    </section>
+
+    <section class="fade-in">
+      <div class="card">
+        <h3>Why it matters</h3>
+        <p>This approach shortens experimentation cycles, improves risk forecasting, and helps prioritize roadmap and marketing changes using quantified behavioral evidence rather than assumptions.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
