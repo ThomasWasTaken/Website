@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ægtepagt | Struktur og formueoverblik</title>
+  <meta name="description" content="Landing page template for ægtepagt med hero, proces, pricing, CTA og FAQ." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./legal-agent-shared.css" />
+</head>
+<body data-agent-page="ægtepagt" data-agent-step="landing" data-track-endpoint="/api/track/">
+  <header class="site-header">
+    <nav class="site-nav container" aria-label="Hovednavigation">
+      <a class="brand" href="./legal_site_agentveiw.html" data-agent-action="nav_home" data-agent-service="ægtepagt">
+        <span class="brand-mark">AV</span>
+        <span class="brand-copy"><strong>PRESTIGE LEGAL</strong><span>Ægtepagt</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Åbn navigation" aria-expanded="false" data-menu-toggle>☰</button>
+      <div class="nav-menu" data-nav-menu>
+        <ul class="nav-links">
+          <li class="dropdown" data-dropdown>
+            <button class="nav-trigger" type="button" data-dropdown-trigger>Services</button>
+            <div class="dropdown-menu">
+              <a href="./testamente.html" data-agent-action="nav_service" data-agent-service="testamente">Testamente<span>Plan for arv og familie</span></a>
+              <a href="./ægtepagt.html" data-agent-action="nav_service" data-agent-service="ægtepagt">Ægtepagt<span>Klarhed om formue og ejerskab</span></a>
+              <a href="./samejeoverenskomst.html" data-agent-action="nav_service" data-agent-service="samejeoverenskomst">Samejeoverenskomst<span>Regler for fælles ejerskab</span></a>
+              <a href="./fuldmagt.html" data-agent-action="nav_service" data-agent-service="fuldmagt">Fuldmagt<span>Beslutningskraft når det gælder</span></a>
+              <a href="./juridisk-konsultation.html" data-agent-action="nav_service" data-agent-service="juridisk-konsultation">Juridisk konsultation<span>Personlig juridisk sparring</span></a>
+              <a href="./lejekontrakt.html" data-agent-action="nav_service" data-agent-service="lejekontrakt">Lejekontrakt<span>Klar lejeaftale mellem parter</span></a>
+            </div>
+          </li>
+          <li><a href="./legal_site_agentveiw.html" data-agent-action="nav_hub" data-agent-service="ægtepagt">Hjem</a></li>
+          <li><a href="#pricing" data-agent-action="nav_anchor" data-agent-service="ægtepagt">Pris</a></li>
+          <li><a href="#faq" data-agent-action="nav_anchor" data-agent-service="ægtepagt">FAQ</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a class="btn btn-primary" href="./juridisk-konsultation.html" data-agent-action="click_cta" data-agent-service="ægtepagt">Tal med en jurist</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero" data-agent-section="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-copy">
+            <span class="eyebrow">Template side · klar til udbygning</span>
+            <h1>Ægtepagt med tydelig struktur for ejerskab, formue og forventninger.</h1>
+            <p>Denne side følger samme genbrugelige arkitektur som de fuldt implementerede sider og er klar til mere detaljeret copy, formularflow eller juridisk validering.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#pricing" data-agent-action="click_cta" data-agent-service="ægtepagt">Se prisplaceholder</a>
+              <a class="btn btn-secondary" href="./juridisk-konsultation.html" data-agent-action="click_cta" data-agent-service="ægtepagt">Book konsultation</a>
+            </div>
+          </div>
+          <aside class="hero-panel">
+            <p class="kicker">Kort fortalt</p>
+            <ul class="trust-list">
+              <li><strong>Lawyer reviewed setup</strong><span>Plads til juristreview og specifikke formue-scenarier.</span></li>
+              <li><strong>Digital og hurtig</strong><span>Brugervenlig vej fra læsning til kontakt.</span></li>
+              <li><strong>Tracking hooks</strong><span>Samme datamodel som resten af sitet.</span></li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section data-agent-section="trust">
+      <div class="container split-feature">
+        <article class="feature-panel">
+          <span class="kicker">Kort fortalt</span>
+          <h2>Ægtepagten skaber tydelige økonomiske rammer mellem ægtefæller.</h2>
+          <p>Den bruges, når par ønsker klare aftaler om særeje, formue eller økonomisk sikkerhed, både nu og på længere sigt.</p>
+        </article>
+        <article class="card">
+          <h3>Typiske behov</h3>
+          <ul class="check-list">
+            <li>Beskyttelse af formue eller virksomhed.</li>
+            <li>Klarhed om særeje og fælles økonomi.</li>
+            <li>Forebyggelse af tvivl ved fremtidige ændringer.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section data-agent-section="comparison">
+      <div class="container">
+        <div class="section-head"><h2>Hvornår er en ægtepagt særlig relevant?</h2><p>Denne side starter med situationerne før processen, fordi brugeren ofte skal forstå relevansen først.</p></div>
+        <div class="grid grid-3">
+          <article class="card"><h3>Ved forskellig formue</h3><p>Hvis den ene part går ind i ægteskabet med større værdier, kan en ægtepagt skabe ro og forventningsafstemning.</p></article>
+          <article class="card"><h3>Ved virksomhed eller arv</h3><p>Den kan være relevant, hvis der er virksomhed, arv eller andre værdier, som ønskes holdt uden for fælles formue.</p></article>
+          <article class="card"><h3>Ved langsigtet planlægning</h3><p>Et klart aftalegrundlag gør det lettere at planlægge økonomisk og undgå tvivl senere.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section data-agent-section="process">
+      <div class="container">
+        <div class="section-head"><h2>Proces</h2><p>Forløbet er enkelt og fokuseret på afklaring, modelvalg og juridisk gennemgang.</p></div>
+        <div class="grid grid-4 steps">
+          <article class="card step-card"><h3>Afklar behov</h3><p>Indsaml oplysninger om formue, ønsker og særlige hensyn.</p></article>
+          <article class="card step-card"><h3>Vælg model</h3><p>Beskriv særeje, undtagelser og den ønskede struktur.</p></article>
+          <article class="card step-card"><h3>Gennemgå</h3><p>Klargør indholdet til juridisk kvalitetssikring.</p></article>
+          <article class="card step-card"><h3>Fortsæt</h3><p>Gå videre til kontakt eller relateret service.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" data-agent-section="pricing">
+      <div class="container">
+        <div class="card pricing-card">
+          <div>
+            <h2>Prisplaceholder</h2>
+            <div class="price-display"><strong>Fra 1.295 kr.</strong><span>eksempel</span></div>
+            <p>Behold samme cardformat på tværs af services for stærk analysekonsistens.</p>
+          </div>
+          <aside class="card">
+            <h3>CTA</h3>
+            <div class="cta-actions">
+              <a class="btn btn-primary" href="./juridisk-konsultation.html" data-agent-action="click_cta" data-agent-service="ægtepagt">Tal med en jurist</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section data-agent-section="cta">
+      <div class="container">
+        <div class="cta-band">
+          <div class="cta-actions">
+            <a class="btn btn-primary" href="./juridisk-konsultation.html" data-agent-action="click_cta" data-agent-service="ægtepagt">Få hjælp til ægtepagt</a>
+            <a class="btn btn-ghost" href="./testamente.html" data-agent-action="related_service_click" data-agent-service="testamente">Se også Testamente</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" data-agent-section="faq">
+      <div class="container faq-list">
+        <details class="faq-item"><summary>Kan siden udbygges?</summary><div class="faq-body">Ja, den er lavet som en fuldt genbrugelig template for videre specialiseret indhold.</div></details>
+        <details class="faq-item"><summary>Er tracking inkluderet?</summary><div class="faq-body">Ja, body, sektioner og CTA'er er mærket til fremtidig analytics-integration.</div></details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><h3>Ægtepagt</h3><p>Template-side i samme modulære system.</p></div>
+      <div><h3>Links</h3><p><a href="./legal_site_agentveiw.html">Hjem</a></p><p><a href="./juridisk-konsultation.html">Juridisk konsultation</a></p></div>
+      <div><h3>Relateret</h3><p><a href="./testamente.html">Testamente</a></p></div>
+    </div>
+  </footer>
+
+  <script src="./legal-agent-shared.js"></script>
+</body>
+</html>

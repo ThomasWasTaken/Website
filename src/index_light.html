@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thomas Lund | Data Science Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;           /* Pure white background */
+      --section-bg: #f8fafc;   /* Very light grey for cards */
+      --border: #e2e8f0;       /* Soft border */
+      --accent: #6d6d6d;       /* Pink accent */
+      --accent-blue: #213671;  /* Blue accent */
+      --text: #14213d;         /* Deep slate for primary text */
+      --text-dim: #475569;     /* Muted slate for descriptions */
+      --nav-bg: rgba(255, 255, 255, 0.8);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background-color: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 10%;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo { font-family: 'JetBrains Mono', monospace; font-weight: bold; font-size: 1.1rem; color: var(--text); }
+    .logo span { color: var(--accent-blue); }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: flex-end; 
+      justify-content: flex-start; 
+      padding: 0 10% 8rem 10%; 
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
+      background-size: 40px 40px;
+      opacity: 0.4;
+      mask-image: radial-gradient(ellipse at center, black, transparent 90%);
+      pointer-events: none;
+    }
+
+    #sphere-canvas { 
+      position: absolute; 
+      top: 50%; 
+      left: 50%; 
+      transform: translate(-50%, -50%);
+      width: 100vw; 
+      height: 100vh; 
+      z-index: 1; 
+      pointer-events: none; 
+    }
+
+    .hero-content { 
+      position: relative; 
+      z-index: 3; 
+      text-align: left;
+    }
+
+    .hero h1 { 
+      font-size: clamp(3.5rem, 10vw, 6rem); 
+      font-weight: 800; 
+      letter-spacing: -4px; 
+      line-height: 0.9; 
+      margin-bottom: 0.5rem; 
+      color: var(--text);
+    }
+
+    .typewriter-box { 
+      font-family: 'JetBrains Mono', monospace; 
+      color: var(--text-dim); 
+      font-size: 1rem; 
+      letter-spacing: 1px;
+    }
+
+    /* Project Registry */
+    .registry {
+      padding: 100px 10%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      margin-bottom: 4rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      letter-spacing: 2px;
+    }
+
+    .section-title::after {
+      content: "";
+      height: 1px;
+      background: var(--border);
+      flex-grow: 1;
+      margin-left: 2rem;
+    }
+
+    .project-item {
+      margin-bottom: 4rem;
+      padding: 2.5rem;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .project-item:hover {
+      border-color: var(--accent-blue);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transform: translateX(5px);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .project-title { font-size: 1.6rem; font-weight: 700; color: var(--text); }
+
+    .project-link { 
+      font-family: 'JetBrains Mono', monospace; 
+      color: var(--text-dim); 
+      text-decoration: none; 
+      font-size: 0.7rem; 
+      border: 1px solid var(--border); 
+      padding: 5px 12px; 
+      border-radius: 4px;
+      transition: 0.2s;
+    }
+
+    .project-link:hover { background: var(--text); color: white; border-color: var(--text); }
+
+    .project-desc { 
+      color: var(--accent-blue); 
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+    }
+
+    .project-bullets { list-style: none; margin-bottom: 1.5rem; }
+    .project-bullets li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
+      color: var(--text-dim);
+    }
+
+    .project-bullets li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .tech-stack { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .tech-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      background: var(--section-bg);
+      padding: 3px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+    }
+
+    footer {
+      padding: 5rem 4rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">T.LUND<span>_ROOT</span></div>
+  <div>
+    <a href="#projects" style="text-decoration: none; color: var(--text-dim); margin-left: 2rem;">Projects</a>
+    <a href="mailto:Thomas.f.lunnd@hotmail.com" style="text-decoration: none; color: var(--text-dim); margin-left: 2rem;">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <canvas id="sphere-canvas"></canvas>
+  <div class="hero-content">
+    <h1 id="hero-name">Thomas Lund</h1>
+    <div class="typewriter-box">
+      <span id="typewriter"></span><span style="border-left: 2px solid var(--accent); margin-left: 5px; animation: blink 1s infinite;"></span>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="registry">
+  <h2 class="section-title">PROJECT_REGISTRY</h2>
+
+  <div class="project-item">
+    <div class="project-header">
+      <h3 class="project-title">Self-Hosted SaaS Analytics Platform</h3>
+      <a href="assets/pages/legal_site.html" class="project-link">View Details</a>
+    </div>
+    <div class="project-desc">GA4 + Multi-Agent Simulation</div>
+    <ul class="project-bullets">
+      <li>Built a self-hosted analytics system integrating GA4 event data with a simulated internal database to analyze user acquisition and conversion funnels.</li>
+      <li>Developed a multi-agent user simulation framework to generate realistic traffic patterns, behavioral flows, and conversion scenarios.</li>
+      <li>Designed dynamic dashboards (Streamlit) to visualize key business metrics including funnel drop-offs, channel performance, and cohort behavior.</li>
+      <li>Implemented automated insight generation (trend detection, anomaly alerts) to support data-driven decision-making.</li>
+      <li>Deployed full pipeline (data ingestion, processing, visualization) using Python, SQL, and Docker.</li>
+    </ul>
+    <div class="tech-stack">
+      <span class="tech-tag">Python</span> <span class="tech-tag">GA4</span> <span class="tech-tag">SQL</span> <span class="tech-tag">Docker</span> <span class="tech-tag">Streamlit</span>
+    </div>
+  </div>
+
+  <div class="project-item">
+    <div class="project-header">
+      <h3 class="project-title">Model Comparison 2026</h3>
+      <a href="https://github.com/imyp/modcomp2026" class="project-link" target="_blank">View GitHub</a>
+    </div>
+    <p class="project-desc">Collaborative modeling and systematic performance evaluation of complex datasets[cite: 7, 8].</p>
+    <div class="tech-stack">
+      <span class="tech-tag">Modeling</span> <span class="tech-tag">Data Analysis</span> <span class="tech-tag">Git</span>
+    </div>
+  </div>
+
+  <div class="project-item">
+    <div class="project-header">
+      <h3 class="project-title">DIS Project</h3>
+      <a href="https://github.com/rasmusdubeck/DIS-Project" class="project-link" target="_blank">View GitHub</a>
+    </div>
+    <p class="project-desc">Development of scalable outcomes and robust technical solutions for distributed systems[cite: 9, 10].</p>
+    <div class="tech-stack">
+      <span class="tech-tag">Python</span> <span class="tech-tag">PostgreSQL</span> <span class="tech-tag">Distributed Systems</span>
+    </div>
+  </div>
+
+  <div class="project-item">
+    <div class="project-header">
+      <h3 class="project-title">Traffic Sign Challenge</h3>
+      <a href="https://github.com/ThomasWasTaken/Traffic_sign_challenge" class="project-link" target="_blank">View GitHub</a>
+    </div>
+    <p class="project-desc">A high-performance deep learning solution for the German Traffic Sign Recognition Benchmark with an accuracy of 99.63%[cite: 17, 24].</p>
+    <div class="tech-stack">
+      <span class="tech-tag">Deep Learning</span> <span class="tech-tag">Python</span> <span class="tech-tag">Computer Vision</span>
+    </div>
+  </div>
+
+  <div class="project-item">
+    <div class="project-header">
+      <h3 class="project-title">Webscraping API</h3>
+      <a href="https://github.com/ThomasWasTaken/Webscraping_API" class="project-link" target="_blank">View GitHub</a>
+    </div>
+    <p class="project-desc">End-to-end classifier for web domains, implementing data scraping, analysis, and predictive modeling[cite: 19, 25].</p>
+    <div class="tech-stack">
+      <span class="tech-tag">API</span> <span class="tech-tag">Python</span> <span class="tech-tag">Automation</span>
+    </div>
+  </div>
+
+<footer>THOMAS.LUND // COPENHAGEN // 2026</footer>
+
+<script>
+const canvas = document.getElementById('sphere-canvas');
+const ctx = canvas.getContext('2d');
+const heroName = document.getElementById('hero-name');
+let points = [];
+const count = 320; 
+const connectionDistance = 200;
+
+let mouse = { x: -2000, y: -2000, targetRY: 0, targetRX: 0 };
+let mouseRotOffset = { x: 0, y: 0 };
+let isHoveringName = false;
+
+const repulsionRadius = 220; 
+const repulsionStrength = 0.45; 
+const rotationSensitivity = 0.001; 
+
+// --- CONTRAST CONFIG ---
+const HUE_TOP = 190;     // Cyan-Grey
+const SAT_TOP = 10;      
+const HUE_BOTTOM = 315;  // Deep Royal Blue
+const SAT_BOTTOM = 150;   // More vibrant at the bottom
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+window.addEventListener('mousemove', (e) => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+  mouse.targetRY = (e.clientX - window.innerWidth / 2) * rotationSensitivity;
+  mouse.targetRX = (e.clientY - window.innerHeight / 2) * -rotationSensitivity;
+});
+
+heroName.addEventListener('mouseenter', () => { isHoveringName = true; });
+heroName.addEventListener('mouseleave', () => { isHoveringName = false; });
+
+class Point {
+  constructor() {
+    this.phi = Math.acos((Math.random() * 2) - 1);
+    this.theta = Math.random() * Math.PI * 2;
+    this.currentRadius = 0.8;
+    this.vPhi = (Math.random() - 0.5) * 0.0008;
+    this.vTheta = (Math.random() - 0.5) * 0.0015;
+    this.dispX = 0;
+    this.dispY = 0;
+  }
+
+  update(projX, projY) {
+    this.phi += this.vPhi;
+    this.theta += this.vTheta;
+    const dx = projX - mouse.x;
+    const dy = projY - mouse.y;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+
+    if (dist < repulsionRadius) {
+      const force = (1 - dist / repulsionRadius) * repulsionStrength;
+      this.dispX += (dx / dist) * force * 12;
+      this.dispY += (dy / dist) * force * 12;
+    }
+    this.dispX *= 0.94;
+    this.dispY *= 0.94;
+
+    const targetR = isHoveringName ? 0.76 : 0.8;
+    this.currentRadius += (targetR - this.currentRadius) * 0.05;
+
+    this.x = this.currentRadius * Math.sin(this.phi) * Math.cos(this.theta);
+    this.y = this.currentRadius * Math.sin(this.phi) * Math.sin(this.theta);
+    this.z = this.currentRadius * Math.cos(this.phi);
+  }
+}
+
+function init() {
+  points = [];
+  for (let i = 0; i < count; i++) points.push(new Point());
+}
+
+let ambientX = 0, ambientY = 0;
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  mouseRotOffset.x += (mouse.targetRX - mouseRotOffset.x) * 0.05;
+  mouseRotOffset.y += (mouse.targetRY - mouseRotOffset.y) * 0.05;
+  ambientX += 0.0006; 
+  ambientY += 0.001;
+  
+  let finalRX = ambientX + mouseRotOffset.x;
+  let finalRY = ambientY + mouseRotOffset.y;
+  
+  const visualRadius = Math.min(canvas.width, canvas.height) * 0.5;
+  const projected = [];
+
+  points.forEach(p => {
+    let yRot = p.y * Math.cos(finalRX) - p.z * Math.sin(finalRX);
+    let zRot = p.y * Math.sin(finalRX) + p.z * Math.cos(finalRX);
+    let xRot = p.x * Math.cos(finalRY) - zRot * Math.sin(finalRY);
+    let finalZ = p.x * Math.sin(finalRY) + zRot * Math.cos(finalRY);
+    
+    const scale = 1.3 / (1.8 - finalZ);
+    let screenX = xRot * scale * visualRadius + canvas.width / 2;
+    let screenY = yRot * scale * visualRadius + canvas.height / 2;
+    
+    p.update(screenX, screenY);
+    projected.push({ x: screenX + p.dispX, y: screenY + p.dispY, z: finalZ, rawY: yRot });
+  });
+
+  for (let i = 0; i < projected.length; i++) {
+    for (let j = i + 1; j < projected.length; j++) {
+      const dist = Math.hypot(projected[i].x - projected[j].x, projected[i].y - projected[j].y);
+      if (dist < connectionDistance) {
+        // --- GRADIENT CALCULATION ---
+        const avgRawY = (projected[i].rawY + projected[j].rawY) / 2;
+        const normalizedY = (avgRawY + 1) / 2; // Value between 0 (top) and 1 (bottom)
+        
+        const hue = HUE_TOP + (normalizedY * (HUE_BOTTOM - HUE_TOP));
+        const sat = SAT_TOP + (normalizedY * (SAT_BOTTOM - SAT_TOP));
+        const opacity = (1 - dist / connectionDistance) * 0.2 * (projected[i].z + 1.2);
+        
+        ctx.strokeStyle = `hsla(${hue}, ${sat}%, 45%, ${opacity})`;
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(projected[i].x, projected[i].y);
+        ctx.lineTo(projected[j].x, projected[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  projected.forEach(p => {
+    const alpha = (p.z + 1.5) / 3;
+    const normalizedY = (p.rawY + 1) / 2;
+    const hue = HUE_TOP + (normalizedY * (HUE_BOTTOM - HUE_TOP));
+    
+    ctx.fillStyle = `hsla(${hue}, 20%, 30%, ${alpha})`;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 1.3, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  
+  requestAnimationFrame(draw);
+}
+
+window.addEventListener('resize', () => { resize(); init(); });
+resize(); init(); draw();
+
+// Typewriter
+const text = document.getElementById('typewriter');
+const phrs = ["Engineering ordered data.", "Visualizing fluid architectures.", "Thomas Lund // 2026"];
+let pIdx = 0, cIdx = 0, del = false;
+function type() {
+  const cur = phrs[pIdx];
+  text.innerText = del ? cur.substr(0, cIdx--) : cur.substr(0, cIdx++);
+  let spd = del ? 30 : 70;
+  if (!del && cIdx > cur.length) { spd = 2000; del = true; }
+  else if (del && cIdx === 0) { del = false; pIdx = (pIdx + 1) % phrs.length; spd = 500; }
+  setTimeout(type, spd);
+}
+type();
+</script>
+</body>
+</html>

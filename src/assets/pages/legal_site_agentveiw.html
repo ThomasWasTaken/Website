@@ -1,602 +1,318 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Premier Legal Services — Trusted Counsel for Business & Families</title>
+  <title>Eksklusiv Juridisk Konsultation | Professionel Rådgivning & Tryghed</title>
+  <meta name="description" content="Få adgang til højt kvalificeret juridisk rådgivning. Vi kombinerer juridisk præcision med personlig dedikation for at sikre din retsstilling." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #f6f8fc;
-      --surface: #ffffff;
-      --ink: #1f2937;
-      --ink-soft: #5b6472;
-      --brand: #133b7a;
-      --brand-2: #0d2f61;
-      --accent: #d18a09;
-      --accent-soft: #f3c04c;
-      --ring: rgba(19, 59, 122, 0.2);
-      --radius: 16px;
-      --shadow-sm: 0 6px 20px rgba(15, 23, 42, 0.08);
-      --shadow-lg: 0 24px 40px rgba(15, 23, 42, 0.14);
-      --maxw: 1120px;
+      --primary: #0f172a; 
+      --accent: #b5935b;  
+      --text: #1e293b;
+      --text-dim: #64748b;
+      --light: #f8fafc;
+      --white: #ffffff;
     }
 
     * { box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
-
     body {
+      font-family: 'Manrope', sans-serif;
+      color: var(--text);
+      background-color: var(--white);
       margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 8% 0%, #ebf1ff 0%, transparent 32%),
-        radial-gradient(circle at 100% 10%, #fef4dc 0%, transparent 28%),
-        var(--bg);
       line-height: 1.6;
     }
 
-    .container {
-      width: min(var(--maxw), 92vw);
-      margin-inline: auto;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      padding: .4rem .8rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.18);
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      font-size: .9rem;
-      font-weight: 500;
-      backdrop-filter: blur(8px);
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: rgba(255, 255, 255, 0.86);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      min-height: 74px;
-    }
-
-    .logo {
-      font-family: "Playfair Display", serif;
-      font-weight: 700;
-      letter-spacing: .2px;
-      font-size: 1.4rem;
-      color: var(--brand);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 1.25rem;
-      margin: 0;
-      padding: 0;
-      align-items: center;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--ink);
-      font-weight: 500;
-      padding: .35rem .5rem;
-      border-radius: 8px;
-    }
-
-    .nav-links a:hover { background: #eef3ff; color: var(--brand); }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: .5rem;
-      border: 0;
-      border-radius: 12px;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      transition: .2s ease;
-      padding: .85rem 1.2rem;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
-      color: #fff;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-
-    .btn-outline {
-      color: #fff;
-      border: 1px solid rgba(255,255,255,.45);
-      background: rgba(255,255,255,.08);
-      backdrop-filter: blur(6px);
-    }
-
-    .hero {
-      padding: 3.8rem 0 2.6rem;
-    }
-
-    .hero-shell {
-      position: relative;
-      overflow: hidden;
-      border-radius: 28px;
-      background: linear-gradient(140deg, var(--brand), var(--brand-2));
-      color: #fff;
-      padding: clamp(1.5rem, 4vw, 3rem);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .hero-shell::after {
-      content: "";
-      position: absolute;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      right: -130px;
-      top: -140px;
-      background: radial-gradient(circle, rgba(255,255,255,.22) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-grid {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 1.6rem;
-      align-items: center;
-    }
-
-    .hero h1 {
-      font-family: "Playfair Display", serif;
-      font-weight: 700;
-      line-height: 1.15;
-      margin: .9rem 0 1rem;
-      font-size: clamp(2rem, 4vw, 3.2rem);
-    }
-
-    .hero p { max-width: 64ch; opacity: .92; font-size: 1.06rem; }
-
-    .hero-actions {
-      display: flex;
-      gap: .75rem;
-      flex-wrap: wrap;
-      margin-top: 1.25rem;
-    }
-
-    .trust-panel {
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.24);
-      border-radius: var(--radius);
-      padding: 1.1rem;
-      backdrop-filter: blur(4px);
-    }
-
-    .trust-panel h3 { margin-top: 0; font-size: 1rem; }
-
-    .stat-list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: .75rem;
-      margin-top: .8rem;
-    }
-
-    .stat {
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: 12px;
-      padding: .7rem;
-    }
-
-    .stat strong { font-size: 1.15rem; display: block; }
-
-    section { padding: 4rem 0; }
-
-    h2.section-title {
-      margin: 0 0 .75rem;
-      font-family: "Playfair Display", serif;
-      color: var(--brand);
-      font-size: clamp(1.8rem, 2.7vw, 2.4rem);
-      text-align: center;
-    }
-
-    .section-copy {
-      text-align: center;
-      max-width: 70ch;
-      margin: 0 auto;
-      color: var(--ink-soft);
-    }
-
-    .services-grid {
-      margin-top: 1.9rem;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      padding: 1.2rem;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid rgba(15,23,42,.05);
-      transition: transform .18s ease;
-    }
-
-    .card:hover { transform: translateY(-3px); }
-
-    .icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 11px;
-      display: grid;
-      place-items: center;
-      font-size: 1.15rem;
-      color: #fff;
-      background: linear-gradient(135deg, var(--brand), #2c5db2);
-      margin-bottom: .85rem;
-    }
-
-    .card h3 { margin: 0 0 .45rem; color: var(--brand); font-size: 1.08rem; }
-    .card p { margin: 0; color: var(--ink-soft); }
-
-    .about-wrap {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 1.3rem;
-      align-items: stretch;
-    }
-
-    .about-panel {
-      background: var(--surface);
-      border-radius: var(--radius);
-      padding: 1.3rem;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .checklist { padding-left: 1.1rem; color: var(--ink-soft); }
-
-    .quote {
-      background: linear-gradient(130deg, #eef4ff, #ffffff);
-      border-left: 5px solid var(--accent);
-      border-radius: 12px;
-      padding: .95rem;
-      font-style: italic;
-      color: #374151;
-    }
-
-    .testimonials { background: #0f2c58; color: #fff; }
-    .testimonials h2.section-title { color: #fff; }
-    .testimonials .section-copy { color: rgba(255,255,255,.82); }
-
-    .test-grid {
-      margin-top: 1.8rem;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .test-card {
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.19);
-      padding: 1.2rem;
-    }
-
-    .test-card p { margin-top: 0; }
-    .test-card small { color: #f6ca6f; font-weight: 600; }
-
-    .contact-wrap {
-      margin-top: 1.6rem;
-      display: grid;
-      grid-template-columns: .95fr 1.05fr;
-      gap: 1rem;
-    }
-
-    .contact-box,
-    form {
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-sm);
-      padding: 1.2rem;
-    }
-
-    label { display: block; font-weight: 600; margin-bottom: .35rem; font-size: .95rem; }
-
-    input, textarea {
-      width: 100%;
-      border: 1px solid #d4deee;
-      border-radius: 10px;
-      padding: .78rem .85rem;
-      font: inherit;
-      margin-bottom: .85rem;
-      background: #fbfdff;
-    }
-
-    input:focus, textarea:focus {
-      border-color: var(--brand);
-      outline: 3px solid var(--ring);
-      background: #fff;
-    }
-
-    textarea { min-height: 130px; resize: vertical; }
-
-    .meta-list {
-      list-style: none;
-      padding: 0;
-      margin: .8rem 0 0;
-      color: var(--ink-soft);
-    }
-
-    .meta-list li { margin: .35rem 0; }
-
-    footer {
-      margin-top: 2.5rem;
-      background: #0d1f3f;
-      color: rgba(255,255,255,.85);
-      padding: 2rem 0;
-    }
-
-    .foot-grid {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: 1.2fr .9fr .9fr;
-      font-size: .95rem;
-    }
-
-    .foot-grid h3 {
-      color: #ffd47f;
-      font-family: "Playfair Display", serif;
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
       margin-top: 0;
     }
 
-    .foot-grid a { color: rgba(255,255,255,.88); text-decoration: none; }
-
-    @media (max-width: 980px) {
-      .hero-grid,
-      .about-wrap,
-      .contact-wrap,
-      .services-grid,
-      .test-grid,
-      .foot-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .services-grid .card:last-child,
-      .test-grid .test-card:last-child { grid-column: 1 / -1; }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
     }
 
-    @media (max-width: 700px) {
-      .nav-links li:not(:last-child) { display: none; }
-      .hero-grid,
-      .about-wrap,
-      .contact-wrap,
-      .services-grid,
-      .test-grid,
-      .foot-grid {
-        grid-template-columns: 1fr;
-      }
-
-      nav { min-height: 66px; }
-      section { padding: 3.2rem 0; }
+    /* Navigation */
+    .site-header {
+      background: var(--white);
+      border-bottom: 1px solid #e2e8f0;
     }
+    .site-nav {
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      padding: 20px 0;
+    }
+    .nav-links a {
+      margin-left: 24px; 
+      text-decoration: none; 
+      color: var(--text);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: var(--white);
+      padding: 120px 0 160px; /* Extra bottom padding for the overlapping cards */
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 300px;
+      height: 300px;
+      background: var(--accent);
+      filter: blur(150px);
+      opacity: 0.2;
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: var(--white);
+      padding: 16px 32px;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 700;
+      display: inline-block;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      filter: brightness(1.1);
+    }
+
+    /* Cards & Grids */
+    .prestige-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: -80px; /* Controlled overlap */
+      position: relative;
+      z-index: 10;
+    }
+
+    .prestige-card {
+      background: var(--white);
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      border-top: 4px solid var(--accent);
+      text-align: center;
+    }
+
+    .service-grid {
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+      gap: 24px;
+    }
+
+    .service-card {
+      background: white; 
+      padding: 32px; 
+      border-radius: 8px; 
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04); 
+      border: 1px solid #f1f5f9;
+      border-top: 4px solid var(--accent); 
+      text-decoration: none; 
+      color: inherit;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Sections */
+    section {
+      padding: 100px 0;
+    }
+
+    .section-head.centered {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .trust-marker {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .cta-box {
+      background: var(--primary); 
+      color: white; 
+      padding: 80px 40px; 
+      border-radius: 12px; 
+      text-align: center;
+    }
+
+    /* Utility */
+    .dim { color: var(--text-dim); }
+    a.btn-white { background: white; color: var(--primary); }
   </style>
 </head>
-<body>
-  <header>
-    <nav class="container">
-      <a class="logo" href="#home">Premier Legal</a>
-      <ul class="nav-links">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#testimonials">Results</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a class="btn btn-primary" href="#contact">Free Consultation</a></li>
-      </ul>
+<body data-agent-page="forside" data-agent-step="landing" data-track-endpoint="/api/track/">
+
+  <header class="site-header">
+    <nav class="site-nav container">
+      <div class="brand">
+        <strong style="font-size: 1.5rem; color: var(--primary);">PRESTIGE<span style="color: var(--accent);">LEGAL</span></strong>
+      </div>
+      <div class="nav-links">
+        <a href="#services" data-agent-action="nav_anchor" data-agent-service="hub">Ydelser</a>
+        <a href="#specialer" data-agent-action="nav_anchor" data-agent-service="hub">Specialer</a>
+        <a href="../../index_light.html" data-agent-action="nav_website" data-agent-service="hub">Website</a>
+        <a href="./juridisk-konsultation.html" data-agent-action="click_cta" data-agent-service="juridisk-konsultation" class="btn-primary" style="padding: 10px 20px;">Book Konsultation</a>
+      </div>
     </nav>
   </header>
 
-  <main id="home">
-    <section class="hero">
-      <div class="container hero-shell">
-        <div class="hero-grid">
-          <div>
-            <span class="tag">⚖️ Award-Winning Legal Team</span>
-            <h1>Strategic legal counsel for businesses, families, and professionals.</h1>
-            <p>
-              From contract negotiations to high-stakes business decisions, Premier Legal delivers practical,
-              responsive, and client-first support with transparent communication at every stage.
-            </p>
-            <div class="hero-actions">
-              <a href="#contact" class="btn btn-primary">Book Consultation</a>
-              <a href="#services" class="btn btn-outline">Explore Services</a>
-            </div>
+  <main>
+    <section class="hero" data-agent-section="hero">
+      <div class="container">
+        <div style="max-width: 700px;">
+          <span class="trust-marker">Ekspertise · Integritet · Resultater</span>
+          <h1 style="font-size: clamp(2.5rem, 5vw, 3.5rem); margin: 20px 0; color: white; line-height: 1.2;">Din foretrukne partner i komplekse juridiske spørgsmål</h1>
+          <p style="font-size: 1.2rem; opacity: 0.9; margin-bottom: 40px;">
+            Vi tilbyder mere end blot juridiske svar. Vi yder strategisk rådgivning baseret på årtiers erfaring, 
+            der beskytter dine interesser og skaber klarhed.
+          </p>
+          <a href="./juridisk-konsultation.html" data-agent-action="click_cta" data-agent-service="juridisk-konsultation" class="btn-primary">Book en fortrolig samtale</a>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top: 0;" data-agent-section="trust">
+      <div class="container">
+        <div class="prestige-grid">
+          <div class="prestige-card">
+            <h3>Diskretion</h3>
+            <p class="dim">Vi værner om dit privatliv og håndterer alle sager med absolut fortrolighed.</p>
           </div>
-          <aside class="trust-panel" aria-label="Firm highlights">
-            <h3>Why clients choose us</h3>
-            <div class="stat-list">
-              <div class="stat"><strong>25+ Years</strong><span>Combined experience</span></div>
-              <div class="stat"><strong>1,200+</strong><span>Client matters served</span></div>
-              <div class="stat"><strong>98%</strong><span>Positive client reviews</span></div>
-              <div class="stat"><strong>24h</strong><span>Typical response time</span></div>
-            </div>
-          </aside>
+          <div class="prestige-card">
+            <h3>Specialisering</h3>
+            <p class="dim">Vores jurister er specialister inden for deres felt og leverer præcision i hver detalje.</p>
+          </div>
+          <div class="prestige-card">
+            <h3>Tilgængelighed</h3>
+            <p class="dim">Personlig kontakt og hurtig respons, når du har mest brug for det.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="services">
+    <section id="services" style="background-color: var(--white);" data-agent-section="services">
       <div class="container">
-        <h2 class="section-title">Comprehensive Legal Services</h2>
-        <p class="section-copy">
-          Our firm provides end-to-end legal support tailored to your priorities, risk profile, and long-term goals.
-        </p>
-        <div class="services-grid">
-          <article class="card">
-            <div class="icon">🏢</div>
-            <h3>Business Law</h3>
-            <p>Entity formation, shareholder agreements, governance, and ongoing strategic counsel for growth.</p>
-          </article>
-          <article class="card">
-            <div class="icon">📑</div>
-            <h3>Contract Review</h3>
-            <p>Clear, negotiation-ready review for vendor contracts, partnerships, and critical transactions.</p>
-          </article>
-          <article class="card">
-            <div class="icon">🛡️</div>
-            <h3>Compliance & Risk</h3>
-            <p>Policy audits and regulatory guidance to reduce exposure while keeping operations efficient.</p>
-          </article>
-          <article class="card">
-            <div class="icon">👨‍👩‍👧</div>
-            <h3>Personal Counsel</h3>
-            <p>Practical support for estate planning, family matters, and major life transitions.</p>
-          </article>
+        <div class="section-head centered">
+          <span class="trust-marker">Juridiske Ydelser</span>
+          <h2 style="font-size: 2.5rem;">Vælg den løsning, der passer dig</h2>
+          <p class="dim" style="max-width: 720px; margin: 20px auto 0;">Hver ydelse er skræddersyet til at sikre dig juridisk tryghed gennem hele livet.</p>
+        </div>
+
+        <div class="service-grid">
+          <a href="./testamente.html" class="service-card" data-agent-action="service_card_click" data-agent-service="testamente">
+            <h3>Testamente</h3>
+            <p class="dim">Skab klarhed om arv, særlige ønsker og tryghed for dine nærmeste.</p>
+          </a>
+          <a href="./ægtepagt.html" class="service-card" data-agent-action="service_card_click" data-agent-service="ægtepagt">
+            <h3>Ægtepagt</h3>
+            <p class="dim">Få struktur på særeje, formue og økonomiske rammer mellem ægtefæller.</p>
+          </a>
+          <a href="./samejeoverenskomst.html" class="service-card" data-agent-action="service_card_click" data-agent-service="samejeoverenskomst">
+            <h3>Samejeoverenskomst</h3>
+            <p class="dim">Skab klare regler for fælles ejerskab af bolig eller andre værdier.</p>
+          </a>
+          <a href="./fuldmagt.html" class="service-card" data-agent-action="service_card_click" data-agent-service="fuldmagt">
+            <h3>Fuldmagt</h3>
+            <p class="dim">Giv en betroet person mulighed for at handle på dine vegne ved behov.</p>
+          </a>
+          <a href="./juridisk-konsultation.html" class="service-card" data-agent-action="service_card_click" data-agent-service="juridisk-konsultation">
+            <h3>Juridisk konsultation</h3>
+            <p class="dim">Få personlig sparring og afklaring, før du vælger den rette løsning.</p>
+          </a>
+          <a href="./lejekontrakt.html" class="service-card" data-agent-action="service_card_click" data-agent-service="lejekontrakt">
+            <h3>Lejekontrakt</h3>
+            <p class="dim">Få en professionel lejeaftale med tydelige vilkår for begge parter.</p>
+          </a>
         </div>
       </div>
     </section>
 
-    <section id="about">
-      <div class="container about-wrap">
-        <article class="about-panel">
-          <h2 class="section-title" style="text-align:left; margin-top: 0;">Trusted since 1995</h2>
-          <p>
-            We blend technical legal depth with plain-language guidance, so you can make confident decisions
-            without unnecessary complexity.
-          </p>
-          <ul class="checklist">
-            <li>Dedicated attorney access and proactive updates.</li>
-            <li>Tailored strategy aligned to your goals and constraints.</li>
-            <li>Meticulous drafting and negotiation standards.</li>
-          </ul>
-        </article>
-        <article class="about-panel">
-          <p class="quote">
-            “Premier Legal helped us close a complex acquisition with confidence. Their responsiveness and
-            strategic judgment made all the difference.”
-          </p>
-          <p><strong>— Sarah Johnson, CEO, TechStart Inc.</strong></p>
-          <hr style="border:none; border-top:1px solid #e8edf7; margin: 1rem 0;" />
-          <p class="quote">
-            “They turned a stressful legal process into a clear plan. We always knew what to expect next.”
-          </p>
-          <p><strong>— Michael Chen, Business Owner</strong></p>
-        </article>
-      </div>
-    </section>
-
-    <section class="testimonials" id="testimonials">
+    <section id="specialer" style="background-color: var(--light);" data-agent-section="specialer">
       <div class="container">
-        <h2 class="section-title">Proven Outcomes. Lasting Relationships.</h2>
-        <p class="section-copy">Clients stay with us because we combine legal precision with practical business sense.</p>
-        <div class="test-grid">
-          <article class="test-card">
-            <p>“The team negotiated terms that significantly reduced our liability exposure.”</p>
-            <small>— COO, Regional Healthcare Group</small>
-          </article>
-          <article class="test-card">
-            <p>“Fast turnaround, clear recommendations, and zero surprises in execution.”</p>
-            <small>— Founder, Logistics Startup</small>
-          </article>
-          <article class="test-card">
-            <p>“Compassionate and thorough support during a complex family legal matter.”</p>
-            <small>— Private Client</small>
-          </article>
+        <div class="section-head centered">
+          <span class="trust-marker">Vores Ekspertise</span>
+          <h2 style="font-size: 2.5rem;">Skræddersyet rådgivning</h2>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px;">
+          <div style="background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+            <h4 style="color: var(--accent); font-size: 1.4rem; margin-bottom: 15px;">Privatretlig Sikring</h4>
+            <p class="dim">Fra formueforhold til komplekse testamentariske ønsker. Vi sikrer, at dine værdier forbliver i de rette hænder.</p>
+          </div>
+          <div style="background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+            <h4 style="color: var(--accent); font-size: 1.4rem; margin-bottom: 15px;">Fast Ejendom</h4>
+            <p class="dim">Professionel sparring ved køb, salg eller sameje. Vi sikrer kontrakten og din investering.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="contact">
+    <section id="kontakt" data-agent-section="cta">
       <div class="container">
-        <h2 class="section-title">Speak with an Attorney</h2>
-        <p class="section-copy">Tell us briefly what you need and we’ll respond within one business day.</p>
-        <div class="contact-wrap">
-          <aside class="contact-box">
-            <h3 style="margin-top:0; color: var(--brand);">Contact Information</h3>
-            <p>We welcome consultations for both urgent and long-term legal needs.</p>
-            <ul class="meta-list">
-              <li>📧 info@premierlegal.com</li>
-              <li>📞 (555) 123-4567</li>
-              <li>📍 123 Legal Plaza, Suite 400, Metropolitan City, MC 12345</li>
-              <li>🕒 Mon–Fri, 8:30 AM – 6:00 PM</li>
-            </ul>
-          </aside>
-
-          <form id="lead-form">
-            <label for="name">Full Name</label>
-            <input id="name" name="name" type="text" required />
-
-            <label for="email">Email Address</label>
-            <input id="email" name="email" type="email" required />
-
-            <label for="matter">Legal Matter</label>
-            <input id="matter" name="matter" type="text" placeholder="e.g., Contract negotiation" required />
-
-            <label for="message">How can we help?</label>
-            <textarea id="message" name="message" placeholder="Share any timeline, documents, or key concerns."></textarea>
-
-            <button class="btn btn-primary" type="submit" style="width:100%;">Request Consultation</button>
-          </form>
+        <div class="cta-box">
+          <h2 style="color: white; font-size: 2.5rem; margin-bottom: 20px;">Klar til at tage det næste skridt?</h2>
+          <p style="font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9;">Book en indledende konsultation og få ro i sindet allerede i dag.</p>
+          <a href="./juridisk-konsultation.html" data-agent-action="click_cta" data-agent-service="juridisk-konsultation" class="btn-primary btn-white">Anmod om konsultation</a>
+          <p style="margin-top: 30px; font-size: 0.85rem; opacity: 0.7;">Vi vender tilbage inden for 24 timer.</p>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container foot-grid">
+  <footer style="background: #0a0f1c; color: white; padding: 80px 0 40px; font-size: 0.9rem;">
+    <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px;">
       <div>
-        <h3>Premier Legal Services</h3>
-        <p>Trusted legal counsel with a commitment to clarity, strategy, and client outcomes.</p>
+        <strong style="font-size: 1.2rem; display: block; margin-bottom: 20px;">PRESTIGE LEGAL</strong>
+        <p style="opacity: 0.6;">Eksklusiv juridisk bistand til private og erhverv.<br>Din tryghed er vores prioritet.</p>
       </div>
       <div>
-        <h3>Quick Links</h3>
-        <p><a href="#services">Services</a></p>
-        <p><a href="#about">About</a></p>
-        <p><a href="#contact">Contact</a></p>
+        <h4 style="color: var(--accent); margin-bottom: 20px; font-family: 'Manrope'; font-size: 1rem;">Navigation</h4>
+        <nav style="display: flex; flex-direction: column; gap: 10px;">
+          <a href="#services" data-agent-action="nav_anchor" data-agent-service="hub" style="color: white; text-decoration: none; opacity: 0.6;">Ydelser</a>
+          <a href="./testamente.html" data-agent-action="footer_link_click" data-agent-service="testamente" style="color: white; text-decoration: none; opacity: 0.6;">Testamente</a>
+        </nav>
       </div>
       <div>
-        <h3>Legal</h3>
-        <p><a href="#">Privacy Policy</a></p>
-        <p><a href="#">Terms of Service</a></p>
-        <p>© 2026 Premier Legal Services</p>
+        <h4 style="color: var(--accent); margin-bottom: 20px; font-family: 'Manrope'; font-size: 1rem;">Kontakt</h4>
+        <p style="opacity: 0.6; margin-bottom: 5px;">Højbro Plads, København</p>
+        <p style="opacity: 0.6;">Tlf: +45 70 00 00 00</p>
       </div>
     </div>
   </footer>
 
-  <script>
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-      link.addEventListener('click', e => {
-        const target = document.querySelector(link.getAttribute('href'));
-        if (!target) return;
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
+<script src="./legal-agent-shared.js"></script>
 
-    document.getElementById('lead-form').addEventListener('submit', e => {
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      alert(`Thank you${name ? `, ${name}` : ''}. Our legal team will contact you shortly.`);
-      e.target.reset();
-    });
-  </script>
 </body>
 </html>

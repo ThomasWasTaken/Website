@@ -179,6 +179,87 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .metric-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .metric-label {
+      color: var(--secondary);
+      font-size: 0.85rem;
+    }
+
+    .metric-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      background: #fff;
+      margin-top: 16px;
+    }
+
+    .panel h4 {
+      margin-bottom: 10px;
+    }
+
+    .simple-bars {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 160px 1fr 56px;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .bar-track {
+      height: 10px;
+      border-radius: 999px;
+      background: #f1f5f9;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #7c3aed, #0ea5e9);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
   </style>
 </head>
 
@@ -190,16 +271,17 @@
       <a class="logo" href="/">T.LUND_ROOT</a>
       <nav class="nav-links">
         <a href="/#projects">Projects</a>
-        <a href="mailto:Thomas.f.lunnd@hotmail.com">Contact</a>
+        <a href="mailto:Thomas.f.lund@hotmail.com">Contact</a>
       </nav>
     </div>
 
     <div class="sub-nav">
       <div class="container sub-nav-inner">
-        <a class="sub-nav-link active" href="./index.html">Overview</a>
+        <a class="sub-nav-link active" href="./site.html">Overview</a>
         <a class="sub-nav-link" href="./architecture.html">Architecture</a>
         <a class="sub-nav-link" href="./simulation.html">Simulation</a>
         <a class="sub-nav-link" href="./insights.html">Insights</a>
+        <a class="sub-nav-link" href="legal_site_agentveiw.html">Agent View</a>
       </div>
     </div>
   </header>
@@ -208,7 +290,7 @@
   <main>
 
     <!-- HERO -->
-    <section class="hero fade-in">
+    <section class="hero fade-in" data-agent-section="hero">
       <h1>Legal Analytics Platform</h1>
       <h2>Simulated SaaS + Multi-Page Legal Intelligence System</h2>
       <p>
@@ -217,11 +299,11 @@
         SaaS purchase and usage patterns — without executing real transactions.
       </p>
 
-      <a class="btn" href="./index.html">Explore Platform</a>
+      <a class="btn" href="./legal_site_agentveiw.html">Explore Platform</a>
     </section>
 
     <!-- MODULES -->
-    <section class="fade-in">
+    <section class="fade-in" data-agent-section="modules">
       <div class="cards-grid">
 
         <a class="card" href="./site.html">
@@ -243,32 +325,165 @@
           <h3>Insights & Analytics</h3>
           <p>Funnels, anomaly detection, and KPI-driven dashboards.</p>
         </a>
-
       </div>
     </section>
 
     <!-- CTA -->
-    <section class="cta fade-in">
+    <section class="cta fade-in" data-agent-section="system-status">
       <h3>System Status</h3>
       <p>
-        This environment runs as a **simulated legal SaaS platform**. No real purchases or legal documents
+        This environment runs as a simulated legal SaaS platform. No real purchases or legal documents
         are generated — the purpose is to demonstrate architecture, UX flows, and analytics capabilities.
       </p>
+    </section>
+
+    <section class="fade-in" data-agent-section="analytics-dashboard">
+      <h3>Live Analytics Dashboard</h3>
+      <p style="color: var(--secondary); margin-top: 6px;">Acquisition, funnel drop-off, channel performance, and cohort behavior directly on this page.</p>
+
+      <div class="dashboard-grid">
+        <div class="metric-card">
+          <div class="metric-label">Events</div>
+          <div id="kpi-events" class="metric-value">-</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Sessions</div>
+          <div id="kpi-sessions" class="metric-value">-</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Conversion Events</div>
+          <div id="kpi-conversions" class="metric-value">-</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Session Conversion Rate</div>
+          <div id="kpi-session-cvr" class="metric-value">-</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Hero Views</div>
+          <div id="kpi-hero-views" class="metric-value">-</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Scroll Events</div>
+          <div id="kpi-scroll-events" class="metric-value">-</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h4>Funnel Drop-Off</h4>
+        <div id="funnel-bars" class="simple-bars"></div>
+      </div>
+
+      <div class="panel">
+        <h4>Channel Performance</h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Channel</th>
+                <th>Sessions</th>
+                <th>Events</th>
+                <th>Conversions</th>
+                <th>CVR %</th>
+              </tr>
+            </thead>
+            <tbody id="channel-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h4>Cohort Behavior</h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Cohort Date</th>
+                <th>Event Date</th>
+                <th>Active Sessions</th>
+              </tr>
+            </thead>
+            <tbody id="cohort-tbody"></tbody>
+          </table>
+        </div>
+      </div>
     </section>
 
   </main>
 
   <!-- SCRIPT -->
   <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
-    });
+    (function () {
+      const fadeObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add("visible");
+        });
+      }, { threshold: 0.25 });
 
-    document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+      document.querySelectorAll(".fade-in").forEach(el => fadeObserver.observe(el));
+
+      const setText = (id, value) => {
+        const node = document.getElementById(id);
+        if (node) node.textContent = value;
+      };
+
+      const renderFunnel = (rows) => {
+        const container = document.getElementById("funnel-bars");
+        if (!container) return;
+        container.innerHTML = "";
+        const max = Math.max(1, ...rows.map(row => row.sessions || 0));
+        rows.forEach(row => {
+          const width = Math.max(3, Math.round(((row.sessions || 0) / max) * 100));
+          const bar = document.createElement("div");
+          bar.className = "bar-row";
+          bar.innerHTML = `
+            <span>${row.step}</span>
+            <div class="bar-track"><div class="bar-fill" style="width:${width}%"></div></div>
+            <strong>${row.sessions || 0}</strong>
+          `;
+          container.appendChild(bar);
+        });
+      };
+
+      const renderRows = (tbodyId, rows, cellKeys) => {
+        const tbody = document.getElementById(tbodyId);
+        if (!tbody) return;
+        tbody.innerHTML = "";
+        rows.forEach(row => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = cellKeys.map(key => `<td>${row[key] ?? ""}</td>`).join("");
+          tbody.appendChild(tr);
+        });
+      };
+
+      const loadDashboard = async () => {
+        try {
+          const response = await fetch("/api/analytics/summary/");
+          if (!response.ok) throw new Error("Unable to load dashboard data");
+          const data = await response.json();
+
+          setText("kpi-events", String(data.kpis?.events ?? 0));
+          setText("kpi-sessions", String(data.kpis?.sessions ?? 0));
+          setText("kpi-conversions", String(data.kpis?.conversion_events ?? 0));
+          setText("kpi-session-cvr", `${data.kpis?.session_conversion_rate_pct ?? 0}%`);
+          setText("kpi-hero-views", String(data.kpis?.hero_views ?? 0));
+          setText("kpi-scroll-events", String(data.kpis?.scroll_events ?? 0));
+
+          renderFunnel(data.funnel || []);
+          renderRows("channel-tbody", data.channels || [], ["channel", "sessions", "events", "conversions", "conversion_rate_pct"]);
+          renderRows("cohort-tbody", (data.cohorts || []).slice(-40), ["cohort_date", "event_date", "active_sessions"]);
+        } catch (error) {
+          setText("kpi-events", "Error");
+          setText("kpi-sessions", "Error");
+          setText("kpi-conversions", "Error");
+          setText("kpi-session-cvr", "Error");
+          setText("kpi-hero-views", "Error");
+          setText("kpi-scroll-events", "Error");
+        }
+      };
+
+      loadDashboard();
+      window.setInterval(loadDashboard, 30000);
+    })();
   </script>
 
 </body>
