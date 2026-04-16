@@ -217,6 +217,87 @@
       margin-bottom: 10px;
     }
 
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .insight-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .insight-item {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.9rem;
+      background: #f8fafc;
+    }
+
+    .insight-graph-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .insight-graph-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .insight-graph-title {
+      font-size: 0.88rem;
+      color: var(--secondary);
+      margin-bottom: 8px;
+    }
+
+    .compare-bars {
+      display: grid;
+      gap: 8px;
+    }
+
+    .compare-row {
+      display: grid;
+      grid-template-columns: 74px 1fr 38px;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--secondary);
+    }
+
+    .compare-track {
+      height: 9px;
+      border-radius: 999px;
+      background: #eef2f7;
+      overflow: hidden;
+    }
+
+    .compare-fill.prev {
+      height: 100%;
+      background: #94a3b8;
+    }
+
+    .compare-fill.curr {
+      height: 100%;
+      background: linear-gradient(90deg, #7c3aed, #0ea5e9);
+    }
+
+    .btn-compact {
+      margin-top: 0;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      background: #fff;
+    }
+
     .simple-bars {
       display: grid;
       gap: 8px;
@@ -242,6 +323,7 @@
       height: 100%;
       background: linear-gradient(90deg, #7c3aed, #0ea5e9);
     }
+
 
     .table-wrap {
       overflow-x: auto;
@@ -277,10 +359,6 @@
 
     <div class="sub-nav">
       <div class="container sub-nav-inner">
-        <a class="sub-nav-link active" href="./site.html">Overview</a>
-        <a class="sub-nav-link" href="./architecture.html">Architecture</a>
-        <a class="sub-nav-link" href="./simulation.html">Simulation</a>
-        <a class="sub-nav-link" href="./insights.html">Insights</a>
         <a class="sub-nav-link" href="legal_site_agentveiw.html">Agent View</a>
       </div>
     </div>
@@ -302,32 +380,6 @@
       <a class="btn" href="./legal_site_agentveiw.html">Explore Platform</a>
     </section>
 
-    <!-- MODULES -->
-    <section class="fade-in" data-agent-section="modules">
-      <div class="cards-grid">
-
-        <a class="card" href="./site.html">
-          <h3>Main Case Study</h3>
-          <p>End-to-end product flow including onboarding, legal document selection, and simulated checkout.</p>
-        </a>
-
-        <a class="card" href="./architecture.html">
-          <h3>Architecture</h3>
-          <p>Data pipelines, processing layers, and system orchestration.</p>
-        </a>
-
-        <a class="card" href="./simulation.html">
-          <h3>Simulation Engine</h3>
-          <p>User behavior modeling, decision trees, and synthetic usage scenarios.</p>
-        </a>
-
-        <a class="card" href="./insights.html">
-          <h3>Insights & Analytics</h3>
-          <p>Funnels, anomaly detection, and KPI-driven dashboards.</p>
-        </a>
-      </div>
-    </section>
-
     <!-- CTA -->
     <section class="cta fade-in" data-agent-section="system-status">
       <h3>System Status</h3>
@@ -338,13 +390,21 @@
     </section>
 
     <section class="fade-in" data-agent-section="analytics-dashboard">
-      <h3>Live Analytics Dashboard</h3>
+      <div class="panel-header">
+        <h3>Live Analytics Dashboard</h3>
+        <button id="simulate-traffic-btn" class="btn btn-compact" type="button">Simulate Traffic</button>
+      </div>
       <p style="color: var(--secondary); margin-top: 6px;">Acquisition, funnel drop-off, channel performance, and cohort behavior directly on this page.</p>
+      <p id="simulate-status" style="color: var(--secondary); margin-top: 6px;"></p>
 
       <div class="dashboard-grid">
         <div class="metric-card">
           <div class="metric-label">Events</div>
           <div id="kpi-events" class="metric-value">-</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Users</div>
+          <div id="kpi-users" class="metric-value">-</div>
         </div>
         <div class="metric-card">
           <div class="metric-label">Sessions</div>
@@ -355,7 +415,7 @@
           <div id="kpi-conversions" class="metric-value">-</div>
         </div>
         <div class="metric-card">
-          <div class="metric-label">Session Conversion Rate</div>
+          <div class="metric-label">Book Appointment CVR (Users)</div>
           <div id="kpi-session-cvr" class="metric-value">-</div>
         </div>
         <div class="metric-card">
@@ -366,11 +426,28 @@
           <div class="metric-label">Scroll Events</div>
           <div id="kpi-scroll-events" class="metric-value">-</div>
         </div>
+        <div class="metric-card">
+          <div class="metric-label">Events per Session</div>
+          <div id="kpi-events-per-session" class="metric-value">-</div>
+        </div>
       </div>
 
       <div class="panel">
         <h4>Funnel Drop-Off</h4>
         <div id="funnel-bars" class="simple-bars"></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>From</th>
+                <th>To</th>
+                <th>Drop-off Sessions</th>
+                <th>Drop-off %</th>
+              </tr>
+            </thead>
+            <tbody id="dropoff-tbody"></tbody>
+          </table>
+        </div>
       </div>
 
       <div class="panel">
@@ -380,6 +457,7 @@
             <thead>
               <tr>
                 <th>Channel</th>
+                <th>Users</th>
                 <th>Sessions</th>
                 <th>Events</th>
                 <th>Conversions</th>
@@ -406,6 +484,13 @@
           </table>
         </div>
       </div>
+
+      <div class="panel">
+        <h4>Automated Insights</h4>
+        <div id="insight-graphs" class="insight-graph-grid"></div>
+        <div id="insight-trends" class="insight-list"></div>
+        <div id="insight-alerts" class="insight-list" style="margin-top:12px;"></div>
+      </div>
     </section>
 
   </main>
@@ -425,6 +510,8 @@
         const node = document.getElementById(id);
         if (node) node.textContent = value;
       };
+      const simulateButton = document.getElementById("simulate-traffic-btn");
+      const simulateStatus = document.getElementById("simulate-status");
 
       const renderFunnel = (rows) => {
         const container = document.getElementById("funnel-bars");
@@ -455,6 +542,97 @@
         });
       };
 
+
+      const renderInsights = (data) => {
+        const trendNode = document.getElementById("insight-trends");
+        const alertNode = document.getElementById("insight-alerts");
+        if (!trendNode || !alertNode) return;
+
+        const trends = data.insights?.trends || [];
+        trendNode.innerHTML = trends.length
+          ? trends.map(row => `
+            <div class="insight-item">
+              <strong>${row.metric}</strong>: ${row.direction} (${row.change_pct}%)
+              <span style="color:var(--secondary);"> ${row.previous_window} -> ${row.current_window}</span>
+            </div>
+          `).join("")
+          : `<div class="insight-item">No trend signals yet.</div>`;
+
+        const alerts = data.insights?.alerts || [];
+        alertNode.innerHTML = alerts.length
+          ? alerts.map(row => `
+            <div class="insight-item">
+              <strong>${row.severity.toUpperCase()}</strong>: ${row.message}
+            </div>
+          `).join("")
+          : `<div class="insight-item">No anomaly alerts.</div>`;
+      };
+
+      const renderInsightGraphs = (data) => {
+        const container = document.getElementById("insight-graphs");
+        if (!container) return;
+
+        const trends = data.insights?.trends || [];
+        const alerts = data.insights?.alerts || [];
+        const maxWindowValue = Math.max(
+          1,
+          ...trends.flatMap(row => [Number(row.previous_window) || 0, Number(row.current_window) || 0])
+        );
+
+        const alertCounts = alerts.reduce((acc, row) => {
+          const key = (row.severity || "info").toLowerCase();
+          acc[key] = (acc[key] || 0) + 1;
+          return acc;
+        }, {});
+        const maxAlertCount = Math.max(1, ...Object.values(alertCounts), 0);
+
+        const trendCards = trends.map(row => {
+          const prev = Number(row.previous_window) || 0;
+          const curr = Number(row.current_window) || 0;
+          const prevPct = Math.max(3, Math.round((prev / maxWindowValue) * 100));
+          const currPct = Math.max(3, Math.round((curr / maxWindowValue) * 100));
+          return `
+            <article class="insight-graph-card">
+              <div class="insight-graph-title">${row.metric} (${row.change_pct}%)</div>
+              <div class="compare-bars">
+                <div class="compare-row">
+                  <span>Previous</span>
+                  <div class="compare-track"><div class="compare-fill prev" style="width:${prevPct}%"></div></div>
+                  <strong>${prev}</strong>
+                </div>
+                <div class="compare-row">
+                  <span>Current</span>
+                  <div class="compare-track"><div class="compare-fill curr" style="width:${currPct}%"></div></div>
+                  <strong>${curr}</strong>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join("");
+
+        const severityOrder = ["high", "medium", "low", "info"];
+        const alertGraph = `
+          <article class="insight-graph-card">
+            <div class="insight-graph-title">Alert severity distribution</div>
+            <div class="compare-bars">
+              ${severityOrder.map(level => {
+                const count = alertCounts[level] || 0;
+                const width = count ? Math.max(3, Math.round((count / maxAlertCount) * 100)) : 0;
+                return `
+                  <div class="compare-row">
+                    <span>${level}</span>
+                    <div class="compare-track"><div class="compare-fill ${level === "high" ? "curr" : "prev"}" style="width:${width}%"></div></div>
+                    <strong>${count}</strong>
+                  </div>
+                `;
+              }).join("")}
+            </div>
+          </article>
+        `;
+
+        container.innerHTML = trendCards + alertGraph;
+      };
+
       const loadDashboard = async () => {
         try {
           const response = await fetch("/api/analytics/summary/");
@@ -462,27 +640,68 @@
           const data = await response.json();
 
           setText("kpi-events", String(data.kpis?.events ?? 0));
+          setText("kpi-users", String(data.kpis?.users ?? 0));
           setText("kpi-sessions", String(data.kpis?.sessions ?? 0));
           setText("kpi-conversions", String(data.kpis?.conversion_events ?? 0));
-          setText("kpi-session-cvr", `${data.kpis?.session_conversion_rate_pct ?? 0}%`);
+          setText("kpi-session-cvr", `${data.kpis?.book_appointment_cvr_pct ?? 0}%`);
           setText("kpi-hero-views", String(data.kpis?.hero_views ?? 0));
           setText("kpi-scroll-events", String(data.kpis?.scroll_events ?? 0));
+          setText("kpi-events-per-session", String(data.kpis?.events_per_session ?? 0));
 
           renderFunnel(data.funnel || []);
-          renderRows("channel-tbody", data.channels || [], ["channel", "sessions", "events", "conversions", "conversion_rate_pct"]);
+          renderRows("dropoff-tbody", data.drop_offs || [], ["from_step", "to_step", "drop_off_sessions", "drop_off_rate_pct"]);
+          renderRows("channel-tbody", data.channels || [], ["channel", "users", "sessions", "events", "conversions", "conversion_rate_pct"]);
           renderRows("cohort-tbody", (data.cohorts || []).slice(-40), ["cohort_date", "event_date", "active_sessions"]);
+          renderInsightGraphs(data);
+          renderInsights(data);
         } catch (error) {
           setText("kpi-events", "Error");
+          setText("kpi-users", "Error");
           setText("kpi-sessions", "Error");
           setText("kpi-conversions", "Error");
           setText("kpi-session-cvr", "Error");
           setText("kpi-hero-views", "Error");
           setText("kpi-scroll-events", "Error");
+          setText("kpi-events-per-session", "Error");
         }
       };
 
+      const runSimulation = async () => {
+        if (!simulateButton || !simulateStatus) return;
+        const password = window.prompt("Enter simulation password:");
+        if (password === null) return;
+        simulateButton.disabled = true;
+        simulateStatus.textContent = "Generating synthetic traffic...";
+        try {
+          const response = await fetch("/api/simulate/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ users: 30, min_sessions: 1, max_sessions: 4, password }),
+          });
+          if (!response.ok) {
+            const errPayload = await response.json().catch(() => ({}));
+            if (response.status === 403) {
+              throw new Error(errPayload.error || "Unauthorized");
+            }
+            throw new Error("Simulation failed");
+          }
+          const payload = await response.json();
+          simulateStatus.textContent = `Simulated ${payload.events_inserted || 0} events across ${payload.sessions_estimated || 0} sessions.`;
+          await loadDashboard();
+        } catch (error) {
+          simulateStatus.textContent = error.message === "unauthorized"
+            ? "Wrong password."
+            : "Simulation failed. Try again.";
+        } finally {
+          simulateButton.disabled = false;
+        }
+      };
+
+      if (simulateButton) {
+        simulateButton.addEventListener("click", runSimulation);
+      }
       loadDashboard();
-      window.setInterval(loadDashboard, 30000);
+      window.setInterval(loadDashboard, 5000);
     })();
   </script>
 

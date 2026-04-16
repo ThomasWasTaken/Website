@@ -14,6 +14,13 @@ SECRET_KEY = os.environ.get(
     "django-insecure-13wbaz(johx0nl3v738xtyzhvi9m@*i$^hm*68my(0nw$$ja*i",
 )
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://www.thomas-lund-code.com",
+    "https://thomas-lund-code.com",
+    "http://localhost",
+    "http://127.0.0.1",
+]
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG", "true").lower() == "true"
 

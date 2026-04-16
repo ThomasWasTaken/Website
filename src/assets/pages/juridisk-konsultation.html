@@ -204,11 +204,46 @@
             <h3>Næste skridt</h3>
             <p>Vælg konsultation, hvis du vil have afklaret din situation før du køber et dokument.</p>
             <div class="cta-actions">
-              <a class="btn btn-primary" href="mailto:kontakt@example.dk" data-agent-action="click_cta" data-agent-service="juridisk-konsultation">Book konsultation</a>
+              <a class="btn btn-primary" href="#consultation-form" data-agent-action="click_cta" data-agent-service="juridisk-konsultation">Book konsultation</a>
               <a class="btn btn-secondary" href="./samejeoverenskomst.html" data-agent-action="related_service_click" data-agent-service="samejeoverenskomst">Se Samejeoverenskomst</a>
             </div>
           </aside>
         </div>
+      </div>
+    </section>
+
+    <section id="consultation-form" data-agent-section="consultation-form">
+      <div class="container">
+        <div class="section-head">
+          <h2>Book konsultation</h2>
+          <p>Udfyld formularen, sa kontakter vi dig med forslag til tid.</p>
+        </div>
+        <form id="consultation-request-form" class="card" style="display:grid; gap:12px; max-width:760px;">
+          <label>
+            <span>Navn *</span>
+            <input name="name" type="text" required style="width:100%; padding:10px; border:1px solid #dcdcdc; border-radius:8px;" />
+          </label>
+          <label>
+            <span>Email *</span>
+            <input name="email" type="email" required style="width:100%; padding:10px; border:1px solid #dcdcdc; border-radius:8px;" />
+          </label>
+          <label>
+            <span>Telefon</span>
+            <input name="phone" type="tel" style="width:100%; padding:10px; border:1px solid #dcdcdc; border-radius:8px;" />
+          </label>
+          <label>
+            <span>Foretrukken tid</span>
+            <input name="preferred_time" type="text" placeholder="Fx tirsdag efter kl. 16" style="width:100%; padding:10px; border:1px solid #dcdcdc; border-radius:8px;" />
+          </label>
+          <label>
+            <span>Din besked</span>
+            <textarea name="message" rows="4" style="width:100%; padding:10px; border:1px solid #dcdcdc; border-radius:8px;"></textarea>
+          </label>
+          <div class="cta-actions">
+            <button class="btn btn-primary" type="submit" data-agent-action="consultation_form_submit" data-agent-service="juridisk-konsultation">Send booking</button>
+          </div>
+          <p id="consultation-form-status" style="color:#555;"></p>
+        </form>
       </div>
     </section>
 
@@ -234,7 +269,7 @@
             <p>Juridisk konsultation er et trygt første skridt for brugere, der ønsker overblik og personlig sparring.</p>
           </div>
           <div class="cta-actions">
-            <a class="btn btn-primary" href="mailto:kontakt@example.dk" data-agent-action="click_cta" data-agent-service="juridisk-konsultation">Anmod om kontakt</a>
+            <a class="btn btn-primary" href="#consultation-form" data-agent-action="click_cta" data-agent-service="juridisk-konsultation">Anmod om kontakt</a>
             <a class="btn btn-ghost" href="./legal_site_agentveiw.html" data-agent-action="return_hub" data-agent-service="juridisk-konsultation">Tilbage til oversigt</a>
           </div>
         </div>
@@ -310,5 +345,50 @@
   </footer>
 
   <script src="./legal-agent-shared.js"></script>
+  <script>
+    (function () {
+      const form = document.getElementById("consultation-request-form");
+      const statusNode = document.getElementById("consultation-form-status");
+      if (!form || !statusNode) return;
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        statusNode.textContent = "Sender...";
+
+        const formData = new FormData(form);
+        const userId = window.__agentUserId || "";
+        const sessionId = window.__agentSessionId || "";
+        const payload = {
+          name: String(formData.get("name") || "").trim(),
+          email: String(formData.get("email") || "").trim(),
+          phone: String(formData.get("phone") || "").trim(),
+          preferred_time: String(formData.get("preferred_time") || "").trim(),
+          message: String(formData.get("message") || "").trim(),
+          page: "juridisk-konsultation",
+          user_id: userId,
+          session_id: sessionId,
+          url: window.location.href,
+          referrer: document.referrer,
+          source_channel: window.__agentSourceChannel || "",
+        };
+
+        try {
+          const response = await fetch("/api/consultation-request/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          if (!response.ok) {
+            throw new Error("Request failed");
+          }
+          statusNode.textContent = "Tak. Din foresporgsel er sendt.";
+          form.reset();
+        } catch (error) {
+          statusNode.textContent = "Noget gik galt. Prov igen om et ojeblik.";
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

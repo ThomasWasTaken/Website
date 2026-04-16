@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const faqItems = document.querySelectorAll(".faq-item");
   const trackedScrollMilestones = new Set();
   const trackedSectionViews = new Set();
-  const sessionStorageKey = "legal_site_session_id";
+  const userStorageKey = "legal_site_user_id";
 
   const endpoint = (() => {
     if (body.dataset.trackEndpoint) return body.dataset.trackEndpoint;
@@ -16,19 +16,112 @@ document.addEventListener("DOMContentLoaded", () => {
     return "http://127.0.0.1:8000/api/track/";
   })();
 
-  const getSessionId = () => {
-    const existing = window.localStorage.getItem(sessionStorageKey);
+  const getSourceChannel = () => {
+    const params = new URLSearchParams(window.location.search);
+    const explicitChannel = (
+      params.get("channel_id")
+      || params.get("source_channel")
+      || params.get("utm_source")
+      || body.dataset.sourceChannel
+    );
+    if (explicitChannel) return explicitChannel.trim();
+
+    if (document.referrer) {
+      try {
+        const refHost = new URL(document.referrer).hostname.replace(/^www\./, "");
+        if (refHost) return `ref:${refHost}`;
+      } catch (error) {
+        // Ignore malformed referrers and fall back to direct.
+      }
+    }
+    return "direct";
+  };
+
+  const sourceChannel = getSourceChannel();
+  window.__agentSourceChannel = sourceChannel;
+  const trackingParams = (() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams();
+    const channelId = urlParams.get("channel_id");
+    const sourceChannelParam = urlParams.get("source_channel");
+    const utmSource = urlParams.get("utm_source");
+
+    if (channelId) params.set("channel_id", channelId);
+    if (sourceChannelParam) params.set("source_channel", sourceChannelParam);
+    if (utmSource) params.set("utm_source", utmSource);
+
+    if (!params.get("channel_id") && sourceChannel) {
+      params.set("channel_id", sourceChannel);
+    }
+    return params;
+  })();
+
+  const appendTrackingParamsToInternalLinks = () => {
+    if (!trackingParams.toString()) return;
+    document.querySelectorAll("a[href]").forEach(link => {
+      const href = link.getAttribute("href");
+      if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) return;
+      let url;
+      try {
+        url = new URL(href, window.location.origin);
+      } catch (error) {
+        return;
+      }
+      if (url.origin !== window.location.origin) return;
+      trackingParams.forEach((value, key) => {
+        if (!url.searchParams.get(key)) {
+          url.searchParams.set(key, value);
+        }
+      });
+      link.setAttribute("href", `${url.pathname}${url.search}${url.hash}`);
+    });
+  };
+
+  appendTrackingParamsToInternalLinks();
+
+  document.querySelectorAll("a[href^='#']").forEach(anchor => {
+    anchor.addEventListener("click", event => {
+      const href = anchor.getAttribute("href") || "";
+      if (!href || href === "#") return;
+      const target = document.querySelector(href);
+      if (!target) return;
+      event.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  document.querySelectorAll("button[data-href]").forEach(button => {
+    button.addEventListener("click", () => {
+      const href = button.dataset.href;
+      if (!href) return;
+      window.location.assign(href);
+    });
+  });
+
+  const getUserId = () => {
+    const existing = window.localStorage.getItem(userStorageKey);
     if (existing) return existing;
-    const created = `session-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
-    window.localStorage.setItem(sessionStorageKey, created);
+    const created = `user-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+    window.localStorage.setItem(userStorageKey, created);
     return created;
   };
 
+  const pageSessionId = `session-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+  const stableUserId = getUserId();
+  window.__agentUserId = stableUserId;
+  window.__agentSessionId = pageSessionId;
+
   const sendTrackingEvent = payload => {
+    const payloadMetadata = payload.metadata || {};
     const eventPayload = {
-      session_id: getSessionId(),
+      user_id: stableUserId,
+      session_id: pageSessionId,
       url: window.location.href,
       referrer: document.referrer,
+      metadata: {
+        source_channel: sourceChannel,
+        ...payloadMetadata,
+      },
       ...payload
     };
 
@@ -45,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
       keepalive: true
     }).catch(() => {});
   };
+  window.__agentTrack = sendTrackingEvent;
 
   if (menuToggle && navMenu) {
     menuToggle.addEventListener("click", () => {
@@ -164,6 +258,21 @@ document.addEventListener("DOMContentLoaded", () => {
       window.__agentViewQueue = window.__agentViewQueue || [];
       window.__agentViewQueue.push(detail);
       sendTrackingEvent(detail);
+    });
+  });
+
+  document.querySelectorAll("a.btn, button.btn").forEach(element => {
+    if (element.dataset.agentAction) return;
+    element.addEventListener("click", () => {
+      const sectionNode = element.closest("[data-agent-section]");
+      sendTrackingEvent({
+        page: body.dataset.agentPage || "unknown",
+        step: body.dataset.agentStep || "unknown",
+        section: sectionNode ? sectionNode.dataset.agentSection : "global",
+        action: "button_click",
+        service: body.dataset.agentPage || "unknown",
+        target: element.getAttribute("href") || element.textContent?.trim() || "button",
+      });
     });
   });
 });

@@ -235,38 +235,30 @@
       <h3 class="project-title">Self-Hosted SaaS Analytics Platform</h3>
       <a href="assets/pages/legal_site.html" class="project-link">View Details</a>
     </div>
-    <div class="project-desc">GA4 + Multi-Agent Simulation</div>
+    <div class="project-desc">Simulated Legal SaaS Platform</div>
     <ul class="project-bullets">
-      <li>Built a self-hosted analytics system integrating GA4 event data with a simulated internal database to analyze user acquisition and conversion funnels.</li>
-      <li>Developed a multi-agent user simulation framework to generate realistic traffic patterns, behavioral flows, and conversion scenarios.</li>
-      <li>Designed dynamic dashboards (Streamlit) to visualize key business metrics including funnel drop-offs, channel performance, and cohort behavior.</li>
-      <li>Implemented automated insight generation (trend detection, anomaly alerts) to support data-driven decision-making.</li>
-      <li>Deployed full pipeline (data ingestion, processing, visualization) using Python, SQL, and Docker.</li>
+      <li>Built a self-hosted legal-tech platform centered on structured document flows, product discovery, and simulated checkout journeys.</li>
+      <li>Designed a multi-page experience for browsing legal services, reviewing offerings, and navigating a realistic SaaS-style customer flow.</li>
+      <li>Created an internal agent-view interface to present the platform from both the user and operational perspective.</li>
+      <li>Integrated lightweight backend serving and on-page analytics components to support interactive product storytelling.</li>
+      <li>Deployed and maintained the project using Python, SQL, Docker, and frontend web technologies.</li>
     </ul>
     <div class="tech-stack">
-      <span class="tech-tag">Python</span> <span class="tech-tag">GA4</span> <span class="tech-tag">SQL</span> <span class="tech-tag">Docker</span> <span class="tech-tag">Streamlit</span>
+      <span class="tech-tag">Python</span> <span class="tech-tag">SQL</span> <span class="tech-tag">Docker</span> <span class="tech-tag">Streamlit</span>
     </div>
   </div>
 
   <div class="project-item">
     <div class="project-header">
-      <h3 class="project-title">Model Comparison 2026</h3>
+      <h3 class="project-title">A bayesian network project for causal protein-signaling networks</h3>
       <a href="https://github.com/imyp/modcomp2026" class="project-link" target="_blank">View GitHub</a>
     </div>
-    <p class="project-desc">Collaborative modeling and systematic performance evaluation of complex datasets[cite: 7, 8].</p>
+    <p class="project-desc">Collaborative modeling and systematic performance evaluation of complex datasets.</p>
     <div class="tech-stack">
+    <ul class="project-bullets">
+      <li>This project develops a probabilistic model to capture causal relationships in protein-signaling networks using Bayesian networks. It includes simulation of data, inference of hidden protein states, and parameter learning via logistic regression and EM algorithms. The approach enables understanding of how observed proteins influence unobserved ones and models biological dependencies efficiently. </li>
+    </ul>
       <span class="tech-tag">Modeling</span> <span class="tech-tag">Data Analysis</span> <span class="tech-tag">Git</span>
-    </div>
-  </div>
-
-  <div class="project-item">
-    <div class="project-header">
-      <h3 class="project-title">DIS Project</h3>
-      <a href="https://github.com/rasmusdubeck/DIS-Project" class="project-link" target="_blank">View GitHub</a>
-    </div>
-    <p class="project-desc">Development of scalable outcomes and robust technical solutions for distributed systems[cite: 9, 10].</p>
-    <div class="tech-stack">
-      <span class="tech-tag">Python</span> <span class="tech-tag">PostgreSQL</span> <span class="tech-tag">Distributed Systems</span>
     </div>
   </div>
 
@@ -275,8 +267,11 @@
       <h3 class="project-title">Traffic Sign Challenge</h3>
       <a href="https://github.com/ThomasWasTaken/Traffic_sign_challenge" class="project-link" target="_blank">View GitHub</a>
     </div>
-    <p class="project-desc">A high-performance deep learning solution for the German Traffic Sign Recognition Benchmark with an accuracy of 99.63%[cite: 17, 24].</p>
+    <p class="project-desc">A high-performance deep learning solution for the German Traffic Sign Recognition Benchmark with an accuracy of 99.63%.</p>
     <div class="tech-stack">
+    <ul class="project-bullets">
+      <li>Designed and implemented a high-performance traffic sign classification model for the German Traffic Sign Recognition Benchmark (GTSRB), achieving 99.63% accuracy without transfer learning or ensembling. Built a custom Mini-ResNet architecture in PyTorch and trained it from scratch using advanced learning rate scheduling (warmup + cosine annealing). Developed a fully automated and reproducible training pipeline, optimized for efficient execution in Google Colab environments. </li>
+      </ul>
       <span class="tech-tag">Deep Learning</span> <span class="tech-tag">Python</span> <span class="tech-tag">Computer Vision</span>
     </div>
   </div>
@@ -288,6 +283,9 @@
     </div>
     <p class="project-desc">End-to-end classifier for web domains, implementing data scraping, analysis, and predictive modeling[cite: 19, 25].</p>
     <div class="tech-stack">
+      <ul class="project-bullets">
+        <li>Built an automated real estate monitoring system using Python and Playwright to track Danish housing listings in real time. Implemented dual detection strategies (hash-based and URL-based) to accurately identify new properties across dynamic websites. Integrated Telegram alerts for instant notifications, ensuring fast response to new market opportunities.</li>
+      </ul>
       <span class="tech-tag">API</span> <span class="tech-tag">Python</span> <span class="tech-tag">Automation</span>
     </div>
   </div>
@@ -441,7 +439,11 @@ resize(); init(); draw();
 
 // Typewriter
 const text = document.getElementById('typewriter');
-const phrs = ["Engineering ordered data.", "Visualizing fluid architectures.", "Thomas Lund // 2026"];
+const phrs = [
+  "Building structured, data-driven systems.",
+  "Analyzing and modeling complex datasets.",
+  "Thomas Lund // Machine Learning & Data Science"
+];
 let pIdx = 0, cIdx = 0, del = false;
 function type() {
   const cur = phrs[pIdx];
