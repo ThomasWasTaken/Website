@@ -8,6 +8,6 @@ services:
       - "8000:8000"
     environment:
       DJANGO_DEBUG: "true"
-      DJANGO_ALLOWED_HOSTS: "127.0.0.1,localhost,0.0.0.0,[::1],web"
+      DJANGO_ALLOWED_HOSTS: "127.0.0.1,www.thomas-lund-code.com,thomas-lund-code.com,localhost,0.0.0.0,[::1],web"
     volumes:
       - ./django/legal_backend:/app/django/legal_backend
